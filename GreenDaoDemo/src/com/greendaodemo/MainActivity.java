@@ -28,6 +28,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 		initializeDatabase();
 	}
 
+	/**
+	 * Function to initialize text view , insert ,delete buttons.
+	 */
 	private void initializeComponents() {
 		textView 	= (TextView)findViewById(R.id.textView);
 		buttonInsert= (Button)findViewById(R.id.buttonInsert);
@@ -36,6 +39,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 		buttonDelete.setOnClickListener(this);
 	}
 
+	/**
+	 * Function to initialize database components.
+	 */
 	private void initializeDatabase() {
 		databaseHelper = new DevOpenHelper(getApplicationContext(), "green_dao_demo.db", null);
 		sqDatabase = databaseHelper.getWritableDatabase();
@@ -43,6 +49,10 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 		textView.setText(getAllTableData());
 	}
 
+	/**
+	 * Function to return a user moodel
+	 * @return User
+	 */
 	private User getUserModel() {
 		User mUser = new User();
 		mUser.setName("Ranvijay");
@@ -68,6 +78,10 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 		textView.setText(getAllTableData());
 	}
 
+	/**
+	 * Function is called when insert button is clicked.
+	 * It inserts one row in database.
+	 */
 	private void onClickInsertButton() {
 		DaoMaster daoMaster = new DaoMaster(sqDatabase);
 		DaoSession daoSession = daoMaster.newSession();
@@ -75,6 +89,10 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 		userDao.insert(getUserModel());
 	}
 
+	/**
+	 * Function is called when delete button is clicked.
+	 * It delete last row from database.
+	 */
 	private void onClickDeleteButton() {
 		DaoMaster daoMaster = new DaoMaster(sqDatabase);
 		DaoSession daoSession = daoMaster.newSession();
@@ -87,6 +105,10 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 		}
 	}
 	
+	/**
+	 * Function to get last row from database table.
+	 * @return User model from database.
+	 */
 	private User getLastDataBaseEntry() {
 		DaoMaster daoMaster = new DaoMaster(sqDatabase);
 		DaoSession daoSession = daoMaster.newSession();
@@ -98,6 +120,10 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 		return null;
 	}
 
+	/**
+	 * Function to read database and return the complete database entry in a single string.
+	 * @return String database entries.
+	 */
 	private String getAllTableData(){
 		String tableData = "Table Data";
 		DaoMaster daoMaster = new DaoMaster(sqDatabase);
